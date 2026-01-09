@@ -31,7 +31,7 @@ const About = () => {
                 className="flex items-center justify-center w-full h-full"
             >
               <p className="flex items-end text-5xl text-gray-500">
-                LEARNING AI
+                LEARNING AI & Web Development
               </p>
               <Card
                   style={{ rotate: "75deg", top: "30%", left: "20%" }}
@@ -61,16 +61,19 @@ const About = () => {
               <Card
                   style={{ rotate: "30deg", top: "70%", left: "70%" }}
                   image="assets/logos/tensorflow.svg"
+                  alt="TensorFlow Logo"
                   containerRef={grid2Container}
               />
               <Card
                   style={{ rotate: "-45deg", top: "70%", left: "25%" }}
                   image="assets/logos/python.svg"
+                  alt="Python Logo"
                   containerRef={grid2Container}
               />
               <Card
                   style={{ rotate: "-45deg", top: "5%", left: "10%" }}
                   image="assets/logos/jupyter.svg"
+                  alt="Jupyter Logo"
                   containerRef={grid2Container}
               />
             </div>

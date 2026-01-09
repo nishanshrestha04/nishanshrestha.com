@@ -1,115 +1,31 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion as Motion } from "motion/react";
+import { NavLink } from "react-router-dom";
 
 function Navigation({ onNavClick }) {
-    const handleNavClick = (e, targetId) => {
-        e.preventDefault();
-
-        // Close mobile menu if callback provided
-        if (onNavClick) onNavClick();
-
-        // Handle home link - scroll to top
-        if (targetId === "#home") {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-            return;
-        }
-
-        // Try multiple methods to find the element
-        let element = document.querySelector(targetId);
-
-        // If not found, try without the hash
-        if (!element) {
-            const id = targetId.replace("#", "");
-            element = document.getElementById(id);
-        }
-
-        // If still not found, try different selectors
-        if (!element) {
-            element = document.querySelector(
-                `[id="${targetId.replace("#", "")}"]`
-            );
-        }
-
-        if (element) {
-            element.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        } else {
-            // Try common section patterns if direct ID doesn't work
-            const sectionName = targetId.replace("#", "");
-            const alternativeSelectors = [
-                `section[data-section="${sectionName}"]`,
-                `.${sectionName}`,
-                `.${sectionName}-section`,
-                `#${sectionName}-section`,
-                `[data-id="${sectionName}"]`,
-            ];
-
-            for (const selector of alternativeSelectors) {
-                element = document.querySelector(selector);
-                if (element) break;
-            }
-
-            if (element) {
-                element.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                });
-            }
-        }
-    };
+    const navLinks = [
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+        { name: "Projects", path: "/projects" },
+        { name: "Work", path: "/work" },
+        { name: "Contact", path: "/contact" },
+    ];
 
     return (
         <ul className="nav-ul">
-            <li className="nav-li">
-                <a
-                    className="nav-link"
-                    href="#home"
-                    onClick={(e) => handleNavClick(e, "#home")}
-                >
-                    Home
-                </a>
-            </li>
-            <li className="nav-li">
-                <a
-                    className="nav-link"
-                    href="#about"
-                    onClick={(e) => handleNavClick(e, "#about")}
-                >
-                    About
-                </a>
-            </li>
-            <li className="nav-li">
-                <a
-                    className="nav-link"
-                    href="#projects"
-                    onClick={(e) => handleNavClick(e, "#projects")}
-                >
-                    Projects
-                </a>
-            </li>
-            <li className="nav-li">
-                <a
-                    className="nav-link"
-                    href="#experience"
-                    onClick={(e) => handleNavClick(e, "#experience")}
-                >
-                    Work
-                </a>
-            </li>
-            <li className="nav-li">
-                <a
-                    className="nav-link"
-                    href="#contact"
-                    onClick={(e) => handleNavClick(e, "#contact")}
-                >
-                    Contact
-                </a>
-            </li>
+            {navLinks.map(({ name, path }) => (
+                <li className="nav-li" key={name}>
+                    <NavLink
+                        to={path}
+                        className={({ isActive }) =>
+                            `nav-link ${isActive ? "text-white font-bold" : "text-neutral-400"}`
+                        }
+                        onClick={onNavClick}
+                    >
+                        {name}
+                    </NavLink>
+                </li>
+            ))}
         </ul>
     );
 }
@@ -122,15 +38,16 @@ const Navbar = () => {
         <div className="fixed inset-x-0 z-20 w-full backdrop-blur-lg bg-primary/40">
             <div className="mx-auto c-space max-w-7xl">
                 <div className="flex items-center justify-between py-2 sm:py-0">
-                    <a
-                        href="/"
+                    <NavLink
+                        to="/"
                         className="text-xl font-bold transition-colors text-neutral-400 hover:text-white"
                     >
                         Nishan
-                    </a>
+                    </NavLink>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
+                        aria-label="Toggle menu"
                     >
                         <img
                             src={
@@ -146,7 +63,7 @@ const Navbar = () => {
                 </div>
             </div>
             {isOpen && (
-                <motion.div
+                <Motion.div
                     className="block overflow-hidden text-center sm:hidden"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -156,7 +73,7 @@ const Navbar = () => {
                     <nav className="pb-5">
                         <Navigation onNavClick={closeMenu} />
                     </nav>
-                </motion.div>
+                </Motion.div>
             )}
         </div>
     );
