@@ -25,61 +25,59 @@ const App = () => {
   return (
     <>
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
-      {!isLoading && (
-        <HelmetProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route
-                  index
-                  element={
-                    <>
-                      <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
-                      <Hero />
-                    </>
-                  }
-                />
-                <Route
-                  path="about"
-                  element={
-                    <>
-                      <SEO title="About Me" description="Learn more about Nishan Shrestha, an AI/ML enthusiast and developer." />
-                      <About />
-                    </>
-                  }
-                />
-                <Route
-                  path="projects"
-                  element={
-                    <>
-                      <SEO title="Projects" description="Check out my latest projects in Web Development and AI." />
-                      <Project />
-                    </>
-                  }
-                />
-                <Route
-                  path="work"
-                  element={
-                    <>
-                      <SEO title="Experience" description="My professional experience and work history." />
-                      <Experiences />
-                    </>
-                  }
-                />
-                <Route
-                  path="contact"
-                  element={
-                    <>
-                      <SEO title="Contact" description="Get in touch with me for collaborations or opportunities." />
-                      <Contact />
-                    </>
-                  }
-                />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </HelmetProvider>
-      )}
+      <HelmetProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <>
+                    <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
+                    <Hero />
+                  </>
+                }
+              />
+              <Route
+                path="about"
+                element={
+                  <>
+                    <SEO title="About Me" description="Learn more about Nishan Shrestha, an AI/ML enthusiast and developer." />
+                    <About />
+                  </>
+                }
+              />
+              <Route
+                path="projects"
+                element={
+                  <>
+                    <SEO title="Projects" description="Check out my latest projects in Web Development and AI." />
+                    <Project />
+                  </>
+                }
+              />
+              <Route
+                path="work"
+                element={
+                  <>
+                    <SEO title="Experience" description="My professional experience and work history." />
+                    <Experiences />
+                  </>
+                }
+              />
+              <Route
+                path="contact"
+                element={
+                  <>
+                    <SEO title="Contact" description="Get in touch with me for collaborations or opportunities." />
+                    <Contact />
+                  </>
+                }
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </HelmetProvider>
     </>
   );
 };
