@@ -47,12 +47,17 @@
     }
   }
 }
+html {
+  overflow-y: scroll;
+}
+
 body {
   background: #030412;
   font-family: "Funnel Display", sans-serif;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 .c-space {

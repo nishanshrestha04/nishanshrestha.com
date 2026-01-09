@@ -5,9 +5,12 @@ import Layout from './components/Layout';
 import SEO from './components/SEO';
 import Hero from './sections/Hero';
 import About from './sections/About';
+import AboutSummary from './sections/AboutSummary';
 import Project from './sections/Project';
+import FeaturedProjects from './sections/FeaturedProjects';
 import Experiences from './sections/Experiences';
 import Contact from './sections/Contact';
+import ContactTeaser from './sections/ContactTeaser';
 import LoadingScreen from './components/LoadingScreen';
 
 const App = () => {
@@ -35,6 +38,9 @@ const App = () => {
                   <>
                     <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
                     <Hero />
+                    <AboutSummary />
+                    <FeaturedProjects />
+                    <ContactTeaser />
                   </>
                 }
               />
