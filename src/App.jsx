@@ -16,7 +16,7 @@ import LoadingScreen from './components/LoadingScreen';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './sections/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
-import AdminPanel from './admin/AdminPanel';
+
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(() => {
@@ -89,15 +89,7 @@ const App = () => {
                   }
                 />
               </Route>
-              <Route
-                path="admin"
-                element={
-                  <>
-                    <SEO title="Admin Panel" description="Portfolio content management" />
-                    <AdminPanel />
-                  </>
-                }
-              />
+
             </Routes>
           </ErrorBoundary>
         </BrowserRouter>
