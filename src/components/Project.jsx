@@ -10,32 +10,47 @@ const Project = ({
   tags,
   setPreview,
 }) => {
-  const [isHidden, setIsHidden] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div
-        className="flex-wrap items-center justify-between py-10 space-y-14 sm:flex sm:space-y-0 cursor-pointer"
-        onMouseEnter={() => setPreview(image)}
-        onMouseLeave={() => setPreview(null)}
-        onClick={() => setIsHidden(true)}
+        className="group relative flex flex-col p-4 md:p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 cursor-pointer h-full"
+        onClick={() => setIsOpen(true)}
       >
-        <div>
-          <p className="text-2xl">{title}</p>
-          <div className="flex flex-wrap gap-2 mt-2 text-sand">
-            {tags.map((tag) => (
-              <span key={tag.id}>{tag.name}</span>
-            ))}
-          </div>
+        {/* Image */}
+        <div className="relative w-full h-48 md:h-56 mb-6 overflow-hidden rounded-xl bg-black/20">
+            <img 
+                src={image} 
+                alt={title} 
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+            />
         </div>
-        <button
-          className="flex items-center gap-1 hover-animation pointer-events-none"
-        >
-          Read More
-          <img src="assets/arrow-right.svg" className="w-5" />
-        </button>
+
+        {/* Content */}
+        <div className="flex flex-col flex-grow">
+            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
+            <p className="text-neutral-400 text-sm leading-relaxed mb-4 line-clamp-3">{description}</p>
+            
+            <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                <div className="flex flex-wrap gap-2">
+                    {tags.slice(0, 3).map((tag) => (
+                    <div key={tag.id} className="p-2 rounded-lg bg-white/5 border border-white/5">
+                        <img src={tag.path} alt={tag.name} className="w-4 h-4" />
+                    </div>
+                    ))}
+                    {tags.length > 3 && (
+                        <span className="text-xs text-neutral-500 self-center">+{tags.length - 3}</span>
+                    )}
+                </div>
+                
+                <div className="p-2 rounded-full bg-white/5 group-hover:bg-blue-500/20 group-hover:text-blue-400 transition-colors">
+                    <img src="assets/arrow-up.svg" className="w-4 h-4 rotate-45" />
+                </div>
+            </div>
+        </div>
       </div>
-      <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent h-[1px] w-full" />
-      {isHidden && (
+
+      {isOpen && (
         <ProjectDetails
           title={title}
           description={description}
@@ -43,7 +58,7 @@ const Project = ({
           image={image}
           tags={tags}
           href={href}
-          closeModal={() => setIsHidden(false)}
+          closeModal={() => setIsOpen(false)}
         />
       )}
     </>

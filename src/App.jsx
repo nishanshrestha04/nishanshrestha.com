@@ -13,6 +13,11 @@ import Contact from './sections/Contact';
 import ContactTeaser from './sections/ContactTeaser';
 import LoadingScreen from './components/LoadingScreen';
 
+import ScrollToTop from './components/ScrollToTop';
+import Footer from './sections/Footer';
+import ErrorBoundary from './components/ErrorBoundary';
+import AdminPanel from './admin/AdminPanel';
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(() => {
     // Check if user has visited in this session
@@ -30,58 +35,71 @@ const App = () => {
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <HelmetProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
+          <ScrollToTop />
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route
+                  index
+                  element={
+                    <>
+                      <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
+                      <Hero />
+                      <AboutSummary />
+                      <FeaturedProjects />
+                      <ContactTeaser />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route
+                  path="about"
+                  element={
+                    <>
+                      <SEO title="About Me" description="Learn more about Nishan Shrestha, an AI/ML enthusiast and developer." />
+                      <About />
+                    </>
+                  }
+                />
+                <Route
+                  path="projects"
+                  element={
+                    <>
+                      <SEO title="Projects" description="Check out my latest projects in Web Development and AI." />
+                      <Project />
+                    </>
+                  }
+                />
+                <Route
+                  path="work"
+                  element={
+                    <>
+                      <SEO title="Experience" description="My professional experience and work history." />
+                      <Experiences />
+                    </>
+                  }
+                />
+                <Route
+                  path="contact"
+                  element={
+                    <>
+                      <SEO title="Contact" description="Get in touch with me for collaborations or opportunities." />
+                      <Contact />
+                    </>
+                  }
+                />
+              </Route>
               <Route
-                index
+                path="admin"
                 element={
                   <>
-                    <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
-                    <Hero />
-                    <AboutSummary />
-                    <FeaturedProjects />
-                    <ContactTeaser />
+                    <SEO title="Admin Panel" description="Portfolio content management" />
+                    <AdminPanel />
                   </>
                 }
               />
-              <Route
-                path="about"
-                element={
-                  <>
-                    <SEO title="About Me" description="Learn more about Nishan Shrestha, an AI/ML enthusiast and developer." />
-                    <About />
-                  </>
-                }
-              />
-              <Route
-                path="projects"
-                element={
-                  <>
-                    <SEO title="Projects" description="Check out my latest projects in Web Development and AI." />
-                    <Project />
-                  </>
-                }
-              />
-              <Route
-                path="work"
-                element={
-                  <>
-                    <SEO title="Experience" description="My professional experience and work history." />
-                    <Experiences />
-                  </>
-                }
-              />
-              <Route
-                path="contact"
-                element={
-                  <>
-                    <SEO title="Contact" description="Get in touch with me for collaborations or opportunities." />
-                    <Contact />
-                  </>
-                }
-              />
-            </Route>
-          </Routes>
+            </Routes>
+          </ErrorBoundary>
         </BrowserRouter>
       </HelmetProvider>
     </>

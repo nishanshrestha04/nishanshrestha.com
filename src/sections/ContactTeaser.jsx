@@ -56,7 +56,7 @@ const ContactTeaser = () => {
               className="mt-6 px-10 py-4 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2"
             >
               Get in Touch
-              <img src="assets/arrow-right.svg" className="w-5 h-5" />
+              <img src="assets/arrow-right.svg" className="w-5 h-5 invert" />
             </NavLink>
           </div>
         </div>

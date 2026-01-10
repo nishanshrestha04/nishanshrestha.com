@@ -1,51 +1,40 @@
-import { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
 import Project from "../components/Project";
 import { myProjects } from "../constants";
+import { motion } from "motion/react";
+
 
 const Projects = () => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const springX = useSpring(x, { damping: 10, stiffness: 50 });
-    const springY = useSpring(y, { damping: 10, stiffness: 50 });
-    const handleMouseMove = (e) => {
-        x.set(e.clientX + 20);
-        y.set(e.clientY + 20);
-    };
-    const [preview, setPreview] = useState(null);
-    const [isDesktop, setIsDesktop] = useState(true);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsDesktop(window.innerWidth >= 640);
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
     return (
         <section
             id="projects"
-            onMouseMove={handleMouseMove}
-            className="relative c-space section-spacing scroll-mt-20"
+            className="c-space section-spacing scroll-mt-20"
         >
-            <h2 className="text-heading">My Selected Projects</h2>
-            <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent mt-12 h-[1px] w-full" />
-            {myProjects.map((project) => (
-                <Project
-                    key={project.id}
-                    {...project}
-                    setPreview={setPreview}
-                />
-            ))}
-            {preview && isDesktop && (
-                <motion.img
-                    className="fixed top-0 left-0 z-50 object-cover h-56 rounded-lg shadow-lg pointer-events-none w-80"
-                    src={preview}
-                    style={{ x: springX, y: springY }}
-                />
-            )}
+            <div className="h-5 md:h-0" /> {/* Mobile Spacer */}
+            <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false, amount: 0.2 }}
+                className="text-heading"
+            >
+                My Selected Projects
+            </motion.h2>
+            
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {myProjects.map((project, index) => (
+                    <motion.div
+                        key={project.id}
+                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                    >
+                        <Project
+                            {...project}
+                        />
+                    </motion.div>
+                ))}
+            </div>
         </section>
     );
 };

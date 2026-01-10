@@ -39,6 +39,26 @@ const Navbar = () => {
         if (isOpen) setIsNavVisible(true);
     }, [isOpen]);
 
+    // Listen for modal events to hide/show navbar
+    useEffect(() => {
+        const handleHideNavbar = () => {
+            setIsNavVisible(false);
+            setIsOpen(false); // Also close mobile menu
+        };
+        
+        const handleShowNavbar = () => {
+            setIsNavVisible(true);
+        };
+        
+        window.addEventListener('hideNavbar', handleHideNavbar);
+        window.addEventListener('showNavbar', handleShowNavbar);
+        
+        return () => {
+            window.removeEventListener('hideNavbar', handleHideNavbar);
+            window.removeEventListener('showNavbar', handleShowNavbar);
+        };
+    }, []);
+
     return (
         <>
             {/* Floating Island Container */}

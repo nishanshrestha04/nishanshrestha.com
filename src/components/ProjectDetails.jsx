@@ -1,4 +1,6 @@
 import { motion } from "motion/react";
+import { useEffect } from "react";
+
 const ProjectDetails = ({
   title,
   description,
@@ -8,41 +10,113 @@ const ProjectDetails = ({
   href,
   closeModal,
 }) => {
+  // Lock body scroll when modal is open and hide navbar
+  useEffect(() => {
+    // Get current scroll position
+    const scrollY = window.scrollY;
+    
+    // Lock scroll with position fixed
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+    
+    // Dispatch event to hide navbar with slight delay to ensure listeners are ready
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('hideNavbar'));
+    }, 10);
+    
+    return () => {
+      // Restore scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
+      
+      // Show navbar again
+      window.dispatchEvent(new CustomEvent('showNavbar'));
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full overflow-auto backdrop-blur-sm">
+    <div 
+      className="fixed inset-0 z-[60] flex items-center justify-center w-full h-full overflow-auto bg-black/70 backdrop-blur-md p-4"
+      onClick={closeModal}
+    >
       <motion.div
-        className="relative max-w-2xl w-full max-h-[90vh] border shadow-sm rounded-2xl bg-gradient-to-l from-midnight to-navy border-white/10 overflow-auto"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
+        className="relative max-w-3xl w-full max-h-[90vh] shadow-2xl rounded-2xl bg-gradient-to-br from-midnight via-navy to-midnight border border-white/20 overflow-hidden"
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        onClick={(e) => e.stopPropagation()}
       >
+        {/* Close Button */}
         <button
           onClick={closeModal}
-          className="absolute p-2 rounded-sm top-5 right-5 bg-midnight hover:bg-gray-500"
+          className="absolute z-10 p-2 rounded-full top-4 right-4 bg-black/50 backdrop-blur-sm border border-white/20 hover:bg-black/70 transition-all group"
         >
-          <img src="assets/close.svg" className="w-6 h-6" />
+          <img src="assets/close.svg" className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
         </button>
-        <img src={image} alt={title} className="w-full rounded-t-2xl" />
-        <div className="p-5 overflow-auto max-h-[60vh]">
-          <h5 className="mb-2 text-2xl font-bold text-white">{title}</h5>
-          <p className="mb-3 font-normal text-neutral-400">{description}</p>
-          {subDescription.map((subDesc, index) => (
-            <p key={index} className="mb-3 font-normal text-neutral-400">{subDesc}</p>
-          ))}
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex flex-wrap gap-3">
-              {tags.map((tag) => (
-                <img
-                  key={tag.id}
-                  src={tag.path}
-                  alt={tag.name}
-                  className="rounded-lg size-10 hover-animation"
-                />
+
+        {/* Scrollable Content */}
+        <div className="overflow-auto max-h-[90vh]">
+          {/* Project Image */}
+          <div className="relative">
+            <img src={image} alt={title} className="w-full max-h-[40vh] object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 to-transparent" />
+          </div>
+
+          {/* Content Section */}
+          <div className="p-6 md:p-8">
+            {/* Title */}
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
+            
+            {/* Description */}
+            <p className="text-neutral-300 text-base md:text-lg leading-relaxed mb-4">{description}</p>
+            
+            {/* Detailed Description */}
+            <div className="space-y-3 mb-6">
+              {subDescription.map((subDesc, index) => (
+                <div key={index} className="flex gap-3">
+                  <span className="text-indigo text-lg mt-1">•</span>
+                  <p className="text-neutral-400 text-sm md:text-base leading-relaxed">{subDesc}</p>
+                </div>
               ))}
             </div>
-            <a href={href} className="inline-flex items-center gap-1 font-medium cursor-pointer hover-animation" target="_blank">
-              View Project{" "}
-              <img src="assets/arrow-up.svg" className="size-4" />
-            </a>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
+
+            {/* Tech Stack Section */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent mb-4">
+                Built with
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {tags.map((tag) => (
+                  <div
+                    key={tag.id}
+                    className="flex items-center justify-center md:justify-start gap-2 px-3 md:px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg hover:bg-white/10 hover:scale-105 transition-all cursor-default"
+                  >
+                    <img src={tag.path} alt={tag.name} className="w-5 h-5 flex-shrink-0" />
+                    <span className="hidden md:inline text-sm text-neutral-300 truncate">{tag.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* View Project Button - Centered */}
+            <div className="flex justify-center">
+              <a 
+                href={href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-medium hover:bg-white/20 hover:gap-3 transition-all group shadow-lg hover:shadow-xl"
+              >
+                View on GitHub
+                <img src="assets/arrow-up.svg" className="w-4 h-4 group-hover:translate-y-[-2px] transition-transform" />
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>

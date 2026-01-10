@@ -6,6 +6,7 @@ import { Float } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
 import { Suspense, useState } from "react";
+import { motion } from "motion/react";
 import Loader from "../components/Loader";
 
 const Hero = () => {

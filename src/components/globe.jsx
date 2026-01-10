@@ -33,6 +33,7 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
     const canvasRef = useRef(null);
     const pointerInteracting = useRef(null);
     const pointerInteractionMovement = useRef(0);
+    const isHovering = useRef(false);
 
     const r = useMotionValue(0);
     const rs = useSpring(r, {
@@ -72,7 +73,10 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
             width: width * 2,
             height: width * 2,
             onRender: (state) => {
-                if (!pointerInteracting.current) phi += 0.005;
+                if (!pointerInteracting.current) {
+                    // Spin faster if hovering
+                    phi += isHovering.current ? 0.03 : 0.005;
+                }
                 state.phi = phi + rs.get();
                 state.width = width * 2;
                 state.height = width * 2;
@@ -92,10 +96,12 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
                 "mx-auto aspect-[1/1] w-full max-w-[600px]",
                 className
             )}
+            onMouseEnter={() => (isHovering.current = true)}
+            onMouseLeave={() => (isHovering.current = false)}
         >
             <canvas
                 className={twMerge(
-                    "size-[30rem] opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
+                    "w-full h-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
                 )}
                 ref={canvasRef}
                 onPointerDown={(e) => {

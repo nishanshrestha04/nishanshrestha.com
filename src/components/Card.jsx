@@ -1,28 +1,31 @@
 import { motion as Motion } from "motion/react";
-const Card = ({ style, text, image, containerRef, alt, ariaLabel }) => {
-  return image && !text ? (
-    <Motion.img
-      className="absolute w-12 sm:w-15 cursor-grab" // reduced size for small devices
-      src={image}
-      alt={alt || "Tech stack icon"}
-      style={style}
-      whileHover={{ scale: 1.05 }}
-      drag
-      dragConstraints={containerRef}
-      dragElastic={1}
-      aria-label={ariaLabel || alt || "Draggable tech stack icon"}
-    />
-  ) : (
+const Card = ({ style, text, image, icon: Icon, containerRef, alt, ariaLabel }) => {
+  return (
     <Motion.div
-      className="absolute px-1 py-2 sm:py-4 text-base sm:text-xl text-center rounded-full ring ring-gray-700 font-extralight bg-storm w-32 sm:w-48 cursor-grab" // smaller text and width for small devices
+      className="absolute flex items-center justify-center cursor-grab hover:z-50"
       style={style}
-      whileHover={{ scale: 1.05 }}
       drag
       dragConstraints={containerRef}
-      dragElastic={1}
-      aria-label={ariaLabel || text || "Draggable tech stack card"}
+      dragElastic={0.2}
+      aria-label={ariaLabel || alt || text || "Draggable tech stack card"}
     >
-      {text}
+      {Icon ? (
+        <div className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/10 shadow-xl">
+            <Icon className="w-8 h-8 sm:w-10 sm:h-10" />
+        </div>
+      ) : image ? (
+        <div className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/10 shadow-xl">
+            <img
+            className="w-8 h-8 sm:w-10 sm:h-10 object-contain pointer-events-none"
+            src={image}
+            alt={alt || "Tech stack icon"}
+            />
+        </div>
+      ) : (
+        <div className="px-4 py-2 text-sm sm:text-base text-center rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white font-medium shadow-xl">
+          {text}
+        </div>
+      )}
     </Motion.div>
   );
 };

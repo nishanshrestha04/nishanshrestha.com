@@ -1,9 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import Navbar from '../sections/Navbar';
-import Footer from '../sections/Footer';
 import ToastProvider from './ToastProvider';
 import Starfield from './Starfield';
 import MouseSpotlight from './MouseSpotlight';
+import Footer from '../sections/Footer';
 
 const Layout = () => {
   const location = useLocation();
@@ -18,13 +19,14 @@ const Layout = () => {
       />
       <MouseSpotlight />
       <Navbar />
-      <main className="grow z-10">
-        <Outlet />
+      <main className="grow z-10 relative">
+            <Outlet />
       </main>
-      {!isHomePage && <Footer className="relative z-20 mt-auto" />}
+      {!isHomePage && location.pathname !== '/contact' && <Footer className="relative z-20 mt-auto" />}
       <ToastProvider />
     </div>
   );
 };
+
 
 export default Layout;
