@@ -54,6 +54,7 @@ const About = () => {
           >
             <img
                 src="assets/coding-pov.png"
+                alt="Nishan Shrestha Coding Setup"
                 className="absolute scale-[1.75] -right-[5rem] -top-[1rem] md:scale-[3] md:left-50 md:inset-y-10 lg:scale-[2.5] group-hover:scale-[1.8] md:group-hover:scale-[3.1] transition-transform duration-500"
             />
             <div className="z-10">
