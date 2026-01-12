@@ -2,12 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 
 const SEO = ({ title, description, keywords, image, url }) => {
-  const defaultTitle = 'Nishan Shrestha | Portfolio';
+  const defaultTitle = 'Nishan Shrestha | AI/ML Enthusiast & Web Developer Portfolio';
   const siteTitle = 'Nishan Shrestha'; // For appending to page titles
   const siteDescription = 'Nishan Shrestha - AI/ML Enthusiast and Web Developer based in Nepal.';
   const siteKeywords = 'Nishan, Nishan Shrestha, Nishan Shrestah, Nishan Portfolio, Nishan Developer, Portfolio, Web Developer, AI, ML, React, Nepal';
   const siteUrl = 'https://nishanshrestha04.com.np'; 
-  const siteImage = '/assets/og-image.png'; 
+  const siteImage = '/assets/og-image.jpg'; 
 
   // Helper to ensure absolute URLs
   const getAbsoluteUrl = (path) => {
