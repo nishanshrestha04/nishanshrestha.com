@@ -7,7 +7,7 @@ const SEO = ({ title, description, keywords, image, url }) => {
   const siteDescription = 'Nishan Shrestha - AI/ML Enthusiast and Web Developer based in Nepal.';
   const siteKeywords = 'Nishan, Nishan Shrestha, Nishan Shrestah, Nishan Portfolio, Nishan Developer, Portfolio, Web Developer, AI, ML, React, Nepal';
   const siteUrl = 'https://nishanshrestha04.com.np'; 
-  const siteImage = '/assets/og-image.jpg'; 
+  const siteImage = '/assets/og-image-with-cta.jpg'; 
 
   // Helper to ensure absolute URLs
   const getAbsoluteUrl = (path) => {
