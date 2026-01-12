@@ -6,7 +6,7 @@ const SEO = ({ title, description, keywords, image, url }) => {
   const siteTitle = 'Nishan Shrestha'; // For appending to page titles
   const siteDescription = 'Nishan Shrestha - AI/ML Enthusiast and Web Developer based in Nepal.';
   const siteKeywords = 'Nishan, Nishan Shrestha, Nishan Shrestah, Nishan Portfolio, Nishan Developer, Portfolio, Web Developer, AI, ML, React, Nepal';
-  const siteUrl = 'https://nishanshrestha04.com.np'; 
+  const siteUrl = 'https://www.nishanshrestha04.com.np'; 
   const siteImage = '/assets/og-image-with-cta.jpg'; 
 
   // Helper to ensure absolute URLs
@@ -47,26 +47,29 @@ const SEO = ({ title, description, keywords, image, url }) => {
       <meta name="twitter:image" content={currentImage} />
 
       {/* JSON-LD Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Nishan Shrestha",
-          "url": siteUrl,
-          "image": getAbsoluteUrl(siteImage),
-          "sameAs": [
-            "https://www.linkedin.com/in/shresthanishan/",
-            "https://github.com/nishanshrestha04",
-            "https://devfolio.co/@nishanshrestha"
-          ],
-          "jobTitle": "Web Developer",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Self-Employed"
-          },
-          "description": siteDescription
-        })}
-      </script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Nishan Shrestha',
+            url: siteUrl,
+            image: getAbsoluteUrl(siteImage),
+            sameAs: [
+              'https://www.linkedin.com/in/shresthanishan/',
+              'https://github.com/nishanshrestha04',
+              'https://devfolio.co/@nishanshrestha',
+            ],
+            jobTitle: 'Web Developer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Self-Employed',
+            },
+            description: siteDescription,
+          }),
+        }}
+      />
     </Helmet>
   );
 };
