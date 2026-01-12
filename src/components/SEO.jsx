@@ -45,6 +45,28 @@ const SEO = ({ title, description, keywords, image, url }) => {
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description || siteDescription} />
       <meta name="twitter:image" content={currentImage} />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Nishan Shrestha",
+          "url": siteUrl,
+          "image": getAbsoluteUrl(siteImage),
+          "sameAs": [
+            "https://www.linkedin.com/in/shresthanishan/",
+            "https://github.com/nishanshrestha04",
+            "https://devfolio.co/@nishanshrestha"
+          ],
+          "jobTitle": "Web Developer",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Self-Employed"
+          },
+          "description": siteDescription
+        })}
+      </script>
     </Helmet>
   );
 };
