@@ -10,6 +10,7 @@ const AboutSummary = () => {
             {/* Background image with reduced opacity */}
             <img
                 src="assets/coding-pov.png"
+                alt="Coding Setup with Monitors"
                 className="absolute scale-[1.75] -right-[5rem] -top-[1rem] md:scale-[2.5] md:-right-10 md:-top-10 opacity-40 md:opacity-30"
             />
             
@@ -28,7 +29,7 @@ const AboutSummary = () => {
                 className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm md:text-base font-medium hover:bg-white/20 hover:gap-3 transition-all w-fit group"
               >
                 More About Me
-                <img src="assets/arrow-right.svg" className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                <img src="assets/arrow-right.svg" alt="" className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
               </NavLink>
             </div>
           </div>

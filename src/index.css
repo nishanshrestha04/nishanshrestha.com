@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
+@import 'tailwindcss';
 @theme {
   --color-primary: #030412;
   --color-midnight: #06091f;
@@ -53,11 +53,29 @@ html {
 
 body {
   background: #030412;
-  font-family: "Funnel Display", sans-serif;
+  font-family: 'Funnel Display', sans-serif;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
   scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-midnight);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-storm);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-lavender);
 }
 
 .c-space {

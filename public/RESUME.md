@@ -13,7 +13,7 @@ Motivated Computer Science student specializing in Artificial Intelligence, with
 ## Work Experience
 
 ### **Front-end Intern**
-*Ninja Infosys | Aug 2024 - Present*
+*Ninja Infosys | Aug 2025 - Jan 2026*
 
 - Worked on a production-grade government ICMS platform, contributing to both admin dashboards and public-facing frontend applications.
 - Built and maintained UI components and modules using Next.js, IBM Carbon Design System, and Sass, following enterprise UI standards.

@@ -92,34 +92,97 @@ export const myProjects = [
   },
   {
     id: 3,
-    title: "AI News",
+    title: "Trinova (YogAI)",
     description:
-      "A fully responsive static website built with HTML and CSS to deliver the latest news and articles on artificial intelligence, designed with a clean, modern interface for optimal user experience across all devices.",
+      "YogAI is an AI-powered real-time yoga pose detection app that provides instant feedback and hands-free gesture control.",
     subDescription: [
-      "Developed a static website using HTML and CSS to share news and articles related to artificial intelligence.",
-      "Designed a clean, modern user interface focused on readability and intuitive navigation.",
-      "Ensured full responsiveness across desktops, tablets, and smartphones using flexible layouts and media queries.",
-      "Optimized website performance and accessibility for a smooth user experience.",
-      "Curated and organized AI-related content to keep users informed and engaged with the latest trends.",
+      "Real-time pose detection and analysis using MediaPipe Pose infrastructure.",
+      "Instant feedback system to help users improve their yoga poses.",
+      "Hands-free gesture control for seamless app navigation during exercises.",
+      "Cross-platform mobile application built with Flutter and a Django backend.",
     ],
-    href: "https://github.com/nishanshrestha04/Web-Development",
+    href: "https://github.com/nishanshrestha04/trinova",
     logo: "",
-    image: "/assets/projects/ai.png",
+    image: "/assets/projects/accesories.png",
     tags: [
       {
         id: 1,
-        name: "HTML",
-        path: "/assets/logos/html5.svg",
+        name: "Python",
+        path: "/assets/logos/python.svg",
       },
       {
         id: 2,
-        name: "CSS",
-        path: "/assets/logos/css3.svg",
+        name: "React",
+        path: "/assets/logos/react.svg",
       },
     ],
   },
   {
     id: 4,
+    title: "Streamify",
+    description:
+      "A modern, full-stack video streaming platform designed for users to upload, watch, and interact with video content.",
+    subDescription: [
+      "Secure user authentication and registration system.",
+      "Robust video management including upload, view, and playback features.",
+      "Interactive social features such as comments, likes, and channel subscriptions.",
+      "Responsive user interface built with React, Material UI, and Tailwind CSS.",
+    ],
+    href: "https://github.com/nishanshrestha04/streamify",
+    logo: "",
+    image: "/assets/projects/chat.png",
+    tags: [
+      {
+        id: 1,
+        name: "React",
+        path: "/assets/logos/react.svg",
+      },
+      {
+        id: 2,
+        name: "Python",
+        path: "/assets/logos/python.svg",
+      },
+      {
+        id: 3,
+        name: "TailwindCSS",
+        path: "/assets/logos/tailwindcss.svg",
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "SocialSphere",
+    description:
+      "A PHP-based social networking platform designed for community building and user interaction, featuring profile management and admin controls.",
+    subDescription: [
+      "Comprehensive user profile management and social interactions.",
+      "Integrated administrative dashboard for platform oversight and management.",
+      "Database-driven content management for persistent user data.",
+      "Responsive design implemented with Bootstrap and custom JavaScript.",
+    ],
+    href: "https://github.com/nishanshrestha04/socialsphere",
+    logo: "",
+    image: "/assets/projects/stroke.png",
+    tags: [
+      {
+        id: 1,
+        name: "PHP",
+        path: "/assets/logos/php.svg",
+      },
+      {
+        id: 2,
+        name: "JavaScript",
+        path: "/assets/logos/javascript.svg",
+      },
+      {
+        id: 3,
+        name: "MariaDB",
+        path: "/assets/logos/maria.svg",
+      },
+    ],
+  },
+  {
+    id: 7,
     title: "PDF Reading Chatbot",
     description:
       "An intelligent chatbot built with LangChain that reads and understands PDF documents, enabling users to ask questions and receive accurate, context-aware answers directly from the document content.",
@@ -177,6 +240,22 @@ export const mySocials = [
 ];
 
 export const experiences = [
+  {
+    title: "Front-end Intern",
+    job: "Ninja Infosys",
+    date: "Aug 2025 - Jan 2026",
+    contents: [
+      "Worked on a production-grade government ICMS platform, contributing to both admin dashboards and public-facing frontend applications.",
+      "Built and maintained UI components and modules using Next.js, IBM Carbon Design System, and Sass, following enterprise UI standards.",
+      "Implemented state management with Zustand and handled server-side data using React Query (TanStack).",
+      "Integrated REST APIs and gained hands-on experience with GraphQL for selected features.",
+      "Developed and shipped new features including video and audio content modules used by real government offices and end users.",
+      "Refactored existing modules, fixed bugs, and improved frontend logic to enhance maintainability and user experience.",
+      "Collaborated with senior developers through a PR-based workflow using GitHub and GitLab, incorporating code review feedback.",
+      "Improved overall UI consistency and usability across multiple sections of the application.",
+      "Used Postman for API testing and Docker for local development environments.",
+    ],
+  },
   {
     title: "Event Executive",
     job: "Sunway Student Representative Council",

@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 
@@ -39,7 +40,7 @@ const ProjectDetails = ({
     };
   }, []);
 
-  return (
+  return createPortal(
     <div 
       className="fixed inset-0 z-[60] flex items-center justify-center w-full h-full overflow-auto bg-black/70 backdrop-blur-md p-4"
       onClick={closeModal}
@@ -120,7 +121,8 @@ const ProjectDetails = ({
           </div>
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

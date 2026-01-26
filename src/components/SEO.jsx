@@ -39,6 +39,11 @@ const SEO = ({ title, description, keywords, image, url }) => {
       <meta property="og:image" content={currentImage} />
       <meta property="og:url" content={currentUrl} />
 
+      {/* Google Search Console Verification */}
+      {(import.meta.env.VITE_GOOGLE_SITE_VERIFICATION) && (
+        <meta name="google-site-verification" content={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION} />
+      )}
+
       {/* Twitter */}
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
