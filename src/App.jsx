@@ -43,7 +43,7 @@ const App = () => {
                   index
                   element={
                     <>
-                      <SEO title="Home" description="Welcome to my portfolio. Explore my work and skills." />
+                      <SEO description="Nishan Shrestha - AI/ML Enthusiast and Full Stack Web Developer from Nepal. Explore my portfolio of projects in React, Machine Learning, and modern web development." />
                       <Hero />
                       <AboutSummary />
                       <FeaturedProjects />

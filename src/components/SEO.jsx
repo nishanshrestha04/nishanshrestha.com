@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 
 const SEO = ({ title, description, keywords, image, url }) => {
-  const defaultTitle = 'Nishan Shrestha | AI/ML Enthusiast & Web Developer Portfolio';
+  const defaultTitle = 'Nishan Shrestha | AI/ML Enthusiast & Full Stack Web Developer Portfolio';
   const siteTitle = 'Nishan Shrestha'; // For appending to page titles
-  const siteDescription = 'Nishan Shrestha - AI/ML Enthusiast and Web Developer based in Nepal.';
-  const siteKeywords = 'Nishan, Nishan Shrestha, Nishan Shrestah, Nishan Portfolio, Nishan Developer, Portfolio, Web Developer, AI, ML, React, Nepal';
+  const siteDescription = 'Nishan Shrestha - AI/ML Enthusiast and Full Stack Web Developer from Nepal. Explore my portfolio of projects in React, Machine Learning, and modern web development.';
+  const siteKeywords = 'Nishan Shrestha, Nishan Shrestha portfolio, Nishan Shrestha developer, Nishan Shrestha Nepal, Web Developer Nepal, AI ML Developer, React Developer, Machine Learning, Full Stack Developer, nishanshrestha04';
   const siteUrl = 'https://www.nishanshrestha04.com.np'; 
   const siteImage = '/assets/og-image-with-cta.jpg'; 
 
@@ -66,7 +66,7 @@ const SEO = ({ title, description, keywords, image, url }) => {
               'https://github.com/nishanshrestha04',
               'https://devfolio.co/@nishanshrestha',
             ],
-            jobTitle: 'Web Developer',
+            jobTitle: 'Full Stack Web Developer',
             worksFor: {
               '@type': 'Organization',
               name: 'Self-Employed',

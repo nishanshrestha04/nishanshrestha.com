@@ -103,7 +103,7 @@ export const myProjects = [
     ],
     href: "https://github.com/nishanshrestha04/trinova",
     logo: "",
-    image: "/assets/projects/accesories.png",
+    image: "/assets/projects/code-placeholder.svg",
     tags: [
       {
         id: 1,
@@ -130,7 +130,7 @@ export const myProjects = [
     ],
     href: "https://github.com/nishanshrestha04/streamify",
     logo: "",
-    image: "/assets/projects/chat.png",
+    image: "/assets/projects/code-placeholder.svg",
     tags: [
       {
         id: 1,
@@ -162,7 +162,7 @@ export const myProjects = [
     ],
     href: "https://github.com/nishanshrestha04/socialsphere",
     logo: "",
-    image: "/assets/projects/stroke.png",
+    image: "/assets/projects/code-placeholder.svg",
     tags: [
       {
         id: 1,
