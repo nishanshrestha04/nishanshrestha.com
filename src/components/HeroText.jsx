@@ -10,16 +10,74 @@ const HeroText = () => {
         hidden: { opacity: 0, x: -50 },
         visible: { opacity: 1, x: 0 },
     };
+
+    const scrollToProjects = () => {
+        const target = document.getElementById('projects');
+        if (!target) return;
+        
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        const duration = 1500;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
+        }
+
+        requestAnimationFrame(animation);
+    };
+
     return (
         <>
             <div className="z-10 mt-20 text-center md:mt-40 md:text-left rounded-3xl bg-clip-text">
+                
+                {/* Animated Gradient Orb */}
+                <div 
+                    className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none hidden md:block"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(129,140,248,0.15) 0%, rgba(167,139,250,0.08) 40%, transparent 70%)',
+                        animation: 'gradient-orb 6s ease-in-out infinite',
+                    }}
+                />
+
+                {/* Desktop */}
                 <div className="flex-col hidden md:flex c-space">
+                    {/* Available for Work Badge */}
+                    <motion.div
+                        className="flex items-center gap-2 mb-4 w-fit"
+                        variants={variants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ delay: 0.8 }}
+                    >
+                        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                            <span 
+                                className="w-2 h-2 rounded-full bg-emerald-400"
+                                style={{ animation: 'pulse-dot 2s ease-in-out infinite' }}
+                            />
+                            <span className="text-xs font-medium text-neutral-300 tracking-wide uppercase">Available for Work</span>
+                        </div>
+                    </motion.div>
+
                     <motion.h1
                         className="text-4xl font-medium"
                         variants={variants}
                         initial="hidden"
                         animate="visible"
                         transition={{ delay: 1 }}
+                        style={{ textShadow: '0 0 40px rgba(129,140,248,0.15)' }}
                     >
                         Hi I'm Nishan
                     </motion.h1>
@@ -42,7 +100,7 @@ const HeroText = () => {
                         >
                             <FlipWords
                                 words={words}
-                                className="font-black text-white text-8xl"
+                                className="font-black text-8xl gradient-text"
                             />
                         </motion.div>
                         <motion.p
@@ -58,7 +116,7 @@ const HeroText = () => {
                         <div className="flex items-center gap-4 mt-8">
                             <motion.button
                                 onClick={() => setIsResumeOpen(true)}
-                                className="px-8 py-3 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-colors flex items-center gap-2"
+                                className="shimmer-btn px-8 py-3 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all flex items-center gap-2 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                                 variants={variants}
                                 initial="hidden"
                                 animate="visible"
@@ -77,35 +135,8 @@ const HeroText = () => {
                             </motion.button>
                             
                             <motion.button
-                                onClick={() => {
-                                    const target = document.getElementById('projects');
-                                    if (!target) return;
-                                    
-                                    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-                                    const startPosition = window.scrollY;
-                                    const distance = targetPosition - startPosition;
-                                    const duration = 1500; // 1.5 seconds for a slow, premium feel
-                                    let startTime = null;
-
-                                    function animation(currentTime) {
-                                        if (startTime === null) startTime = currentTime;
-                                        const timeElapsed = currentTime - startTime;
-                                        const run = ease(timeElapsed, startPosition, distance, duration);
-                                        window.scrollTo(0, run);
-                                        if (timeElapsed < duration) requestAnimationFrame(animation);
-                                    }
-
-                                    // Ease-in-out cubic function
-                                    function ease(t, b, c, d) {
-                                        t /= d / 2;
-                                        if (t < 1) return c / 2 * t * t * t + b;
-                                        t -= 2;
-                                        return c / 2 * (t * t * t + 2) + b;
-                                    }
-
-                                    requestAnimationFrame(animation);
-                                }}
-                                className="px-8 py-3 text-lg font-medium text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors"
+                                onClick={scrollToProjects}
+                                className="px-8 py-3 text-lg font-medium text-white border border-white/20 rounded-full hover:bg-white/10 hover:border-white/30 transition-all"
                                 variants={variants}
                                 initial="hidden"
                                 animate="visible"
@@ -119,7 +150,25 @@ const HeroText = () => {
                     </div>
                 </div>
 
+                {/* Mobile */}
                 <div className="flex flex-col space-y-6 md:hidden">
+                    {/* Available for Work Badge - Mobile */}
+                    <motion.div
+                        className="flex items-center justify-center"
+                        variants={variants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ delay: 0.8 }}
+                    >
+                        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                            <span 
+                                className="w-2 h-2 rounded-full bg-emerald-400"
+                                style={{ animation: 'pulse-dot 2s ease-in-out infinite' }}
+                            />
+                            <span className="text-xs font-medium text-neutral-300 tracking-wide uppercase">Available for Work</span>
+                        </div>
+                    </motion.div>
+
                     <motion.p
                         className="text-4xl font-medium"
                         variants={variants}
@@ -147,7 +196,7 @@ const HeroText = () => {
                         >
                             <FlipWords
                                 words={words}
-                                className="font-bold text-white text-7xl"
+                                className="font-bold text-7xl gradient-text"
                             />
                         </motion.div>
                         <motion.p
@@ -163,7 +212,7 @@ const HeroText = () => {
                         <div className="flex flex-col gap-4 mt-6">
                             <motion.button
                                 onClick={() => setIsResumeOpen(true)}
-                                className="px-6 py-3 text-base font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 w-full"
+                                className="shimmer-btn px-6 py-3 text-base font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all flex items-center justify-center gap-2 w-full"
                                 variants={variants}
                                 initial="hidden"
                                 animate="visible"
@@ -182,35 +231,8 @@ const HeroText = () => {
                             </motion.button>
 
                             <motion.button
-                                onClick={() => {
-                                    const target = document.getElementById('projects');
-                                    if (!target) return;
-                                    
-                                    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-                                    const startPosition = window.scrollY;
-                                    const distance = targetPosition - startPosition;
-                                    const duration = 1500; // 1.5 seconds for a slow, premium feel
-                                    let startTime = null;
-
-                                    function animation(currentTime) {
-                                        if (startTime === null) startTime = currentTime;
-                                        const timeElapsed = currentTime - startTime;
-                                        const run = ease(timeElapsed, startPosition, distance, duration);
-                                        window.scrollTo(0, run);
-                                        if (timeElapsed < duration) requestAnimationFrame(animation);
-                                    }
-
-                                    // Ease-in-out cubic function
-                                    function ease(t, b, c, d) {
-                                        t /= d / 2;
-                                        if (t < 1) return c / 2 * t * t * t + b;
-                                        t -= 2;
-                                        return c / 2 * (t * t * t + 2) + b;
-                                    }
-
-                                    requestAnimationFrame(animation);
-                                }}
-                                className="px-6 py-3 text-base font-medium text-white border border-white/20 rounded-full hover:bg-white/10 transition-colors text-center w-full"
+                                onClick={scrollToProjects}
+                                className="px-6 py-3 text-base font-medium text-white border border-white/20 rounded-full hover:bg-white/10 hover:border-white/30 transition-all text-center w-full"
                                 variants={variants}
                                 initial="hidden"
                                 animate="visible"
@@ -224,16 +246,7 @@ const HeroText = () => {
                     </div>
                 </div>
 
-                {/* Scroll Indicator */}
-                <motion.div 
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.5, duration: 1 }}
-                >
-                    <span className="text-xs font-light tracking-widest text-neutral-500 uppercase">Scroll</span>
-                    <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
-                </motion.div>
+
             </div>
             <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
         </>

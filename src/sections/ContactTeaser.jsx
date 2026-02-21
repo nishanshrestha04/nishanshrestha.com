@@ -43,21 +43,65 @@ const ContactTeaser = () => {
           {/* Ambient Glow (Static) */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-lg bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none" />
 
+          {/* Floating Gradient Orbs */}
+          <div 
+            className="absolute top-10 left-20 w-32 h-32 rounded-full pointer-events-none opacity-20 blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, #818cf8, transparent)',
+              animation: 'float 6s ease-in-out infinite',
+            }}
+          />
+          <div 
+            className="absolute bottom-20 right-16 w-24 h-24 rounded-full pointer-events-none opacity-15 blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, #f472b6, transparent)',
+              animation: 'float 8s ease-in-out infinite 2s',
+            }}
+          />
+
           <div className="relative z-10 flex flex-col items-center text-center gap-6">
-            <h2 className="text-4xl md:text-6xl font-bold text-white font-display tracking-tight">
-              Let's Work Together
-            </h2>
-            <p className="text-neutral-400 max-w-xl text-lg md:text-xl leading-relaxed">
-              Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and ideas.
-            </p>
-            
-            <NavLink 
-              to="/contact"
-              className="mt-6 px-10 py-4 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2"
+            <motion.h2 
+              className="text-4xl md:text-6xl font-bold font-display tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: false }}
+              style={{
+                background: 'linear-gradient(135deg, #ffffff 0%, #a78bfa 40%, #818cf8 60%, #f472b6 100%)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                animation: 'shimmer-text 4s linear infinite',
+              }}
             >
-              Get in Touch
-              <img src="assets/arrow-right.svg" alt="" className="w-5 h-5 invert" />
-            </NavLink>
+              Let's Work Together
+            </motion.h2>
+            <motion.p 
+              className="text-neutral-400 max-w-xl text-lg md:text-xl leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              viewport={{ once: false }}
+            >
+              Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and ideas.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: false }}
+            >
+              <NavLink 
+                to="/contact"
+                className="shimmer-btn mt-6 px-10 py-4 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all hover:scale-105 flex items-center gap-2"
+                style={{ animation: 'pulse-glow 3s ease-in-out infinite' }}
+              >
+                Get in Touch
+                <img src="assets/arrow-right.svg" alt="" className="w-5 h-5 invert" />
+              </NavLink>
+            </motion.div>
           </div>
         </div>
       </div>

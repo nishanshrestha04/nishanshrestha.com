@@ -14,6 +14,7 @@
   --color-orange: #cc6033;
   --color-sand: #d6995c;
   --color-coral: #ea4884;
+  --color-accent-glow: #f5a623;
   --animate-orbit: orbit 50s linear infinite;
   @keyframes orbit {
     0% {
@@ -60,6 +61,7 @@ body {
   scrollbar-gutter: stable;
 }
 
+/* Enhanced Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -70,12 +72,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-storm);
+  background: linear-gradient(180deg, var(--color-royal), var(--color-aqua));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-lavender);
+  background: linear-gradient(180deg, var(--color-lavender), var(--color-aqua));
 }
 
 .c-space {
@@ -91,7 +93,11 @@ body {
 }
 
 .text-heading {
-  @apply font-bold text-3xl md:text-4xl;
+  @apply font-bold text-3xl md:text-4xl tracking-tight;
+  background: linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .headtext {
@@ -100,6 +106,175 @@ body {
 
 .subtext {
   @apply text-neutral-400 text-sm md:text-base text-pretty;
+}
+
+/* ── Gradient Text Utility ── */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    #818cf8 0%,
+    #a78bfa 30%,
+    #c084fc 60%,
+    #f472b6 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #f59e0b 0%, #f472b6 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glassmorphism Utility ── */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Glow Border ── */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(129, 140, 248, 0.3),
+    rgba(167, 139, 250, 0.1),
+    rgba(244, 114, 182, 0.3)
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Shimmer Button ── */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+}
+
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.shimmer-btn:hover::after {
+  left: 100%;
+}
+
+/* ── Animated Gradient Orb ── */
+@keyframes gradient-orb {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(167, 139, 250, 0.5),
+      0 0 60px rgba(129, 140, 248, 0.2);
+  }
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes accent-line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ── Pulsing Dot ── */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
 }
 
 /* Navigation */

@@ -30,26 +30,33 @@ const About = () => {
   return (
       <section className="c-space section-spacing scroll-mt-28" id="about">
         <div className="h-5 md:h-0" /> {/* Mobile Spacer */}
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: false, amount: 0.2 }}
-          className="text-heading"
+
+        {/* Heading with accent line — animates on page open */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12"
         >
-          About Me
-        </motion.h2>
+          <h2 className="text-heading">About Me</h2>
+          <motion.div
+            className="h-[2px] w-20 mt-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: 'left' }}
+          />
+        </motion.div>
         
-        {/* Main Grid Layout - Restored Original Design */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
+        {/* Main Grid Layout */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem]">
           
           {/* Grid 1: Intro */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-end grid-default-color grid-1 group"
           >
             <img
@@ -68,11 +75,10 @@ const About = () => {
 
           {/* Grid 2: Floating Cards */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="grid-default-color grid-2"
           >
             <div
@@ -145,11 +151,10 @@ const About = () => {
 
           {/* Grid 3: Globe */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="grid-black-color grid-3"
           >
             <div className="z-10 w-[50%]">
@@ -165,11 +170,10 @@ const About = () => {
 
           {/* Grid 4: Contact */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="grid-special-color grid-4"
           >
             <div className="flex flex-col items-center justify-center gap-4 size-full">
@@ -182,11 +186,10 @@ const About = () => {
 
           {/* Grid 5: Tech Stack */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="grid-default-color grid-5"
           >
             <div className="z-10 w-[50%]">
@@ -202,11 +205,10 @@ const About = () => {
           </motion.div>
           {/* Grid 6: Day In Life */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="grid-default-color grid-6"
           >
             <DayInLife />

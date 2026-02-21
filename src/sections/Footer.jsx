@@ -5,7 +5,10 @@ const Footer = ({ className }) => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <section className={twMerge("c-space pb-6 pt-5 md:pb-4 md:pt-4 border-t border-neutral-800/50", className)}>
+    <section className={twMerge("c-space pb-6 pt-5 md:pb-4 md:pt-4 relative", className)}>
+      {/* Gradient top border */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      
       {/* Footer Content */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 md:gap-4 text-neutral-400">
         {/* Name */}
@@ -21,7 +24,7 @@ const Footer = ({ className }) => {
             <a 
               href={social.href} 
               key={index}
-              className="hover:opacity-70 transition-opacity"
+              className="hover:opacity-70 transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(129,140,248,0.4)]"
               target="_blank"
               rel="noopener noreferrer"
             >
