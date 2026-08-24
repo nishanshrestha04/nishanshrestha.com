@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "motion/react";
 import { experiences } from "../constants";
 import { useRef } from "react";

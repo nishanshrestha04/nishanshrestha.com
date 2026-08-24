@@ -1,3 +1,5 @@
+"use client";
+
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { useEffect } from "react";

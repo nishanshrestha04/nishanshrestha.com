@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { AnimatePresence, motion as Motion } from "motion/react";
 import { toast } from "sonner";

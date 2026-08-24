@@ -1,6 +1,8 @@
+"use client";
+
 import Project from "../components/Project";
 import { myProjects } from "../constants";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "motion/react";
 
 const FeaturedProjects = () => {
@@ -28,13 +30,13 @@ const FeaturedProjects = () => {
                         style={{ transformOrigin: 'left' }}
                     />
                 </div>
-                <NavLink 
-                    to="/projects"
+                <Link 
+                    href="/projects"
                     className="hidden md:flex items-center gap-2 px-4 py-2 shimmer-btn bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all group"
                 >
                     View All Projects
                     <img src="assets/arrow-right.svg" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </NavLink>
+                </Link>
             </motion.div>
             
             {/* Project Cards Grid */}
@@ -55,13 +57,13 @@ const FeaturedProjects = () => {
             </div>
 
             <div className="flex md:hidden justify-center mt-8">
-                <NavLink 
-                    to="/projects"
+                <Link 
+                    href="/projects"
                     className="shimmer-btn inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-all group"
                 >
                     View All Projects
                     <img src="assets/arrow-right.svg" className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </NavLink>
+                </Link>
             </div>
         </section>
     );

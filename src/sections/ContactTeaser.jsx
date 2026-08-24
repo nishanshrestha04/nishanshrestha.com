@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 
 const ContactTeaser = () => {
@@ -93,14 +95,14 @@ const ContactTeaser = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: false }}
             >
-              <NavLink 
-                to="/contact"
+              <Link 
+                href="/contact"
                 className="shimmer-btn mt-6 px-10 py-4 text-lg font-medium text-black bg-white rounded-full hover:bg-neutral-200 transition-all hover:scale-105 flex items-center gap-2"
                 style={{ animation: 'pulse-glow 3s ease-in-out infinite' }}
               >
                 Get in Touch
                 <img src="assets/arrow-right.svg" alt="" className="w-5 h-5 invert" />
-              </NavLink>
+              </Link>
             </motion.div>
           </div>
         </div>

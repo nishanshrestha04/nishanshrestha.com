@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { motion } from "motion/react";
 
 const AboutSummary = () => {
@@ -38,13 +40,13 @@ const AboutSummary = () => {
               </div>
               
               {/* Enhanced CTA Button */}
-              <NavLink 
-                to="/about"
+              <Link 
+                href="/about"
                 className="shimmer-btn inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm md:text-base font-medium hover:bg-white/20 hover:gap-3 transition-all w-fit group"
               >
                 More About Me
                 <img src="assets/arrow-right.svg" alt="" className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-              </NavLink>
+              </Link>
             </div>
           </motion.div>
 

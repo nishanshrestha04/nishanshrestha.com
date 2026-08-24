@@ -1,6 +1,9 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion as Motion, AnimatePresence, useScroll, useMotionValueEvent } from "motion/react";
-import { NavLink, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
     { name: "Home", path: "/" },
@@ -14,7 +17,7 @@ const Navbar = () => {
     const [isNavVisible, setIsNavVisible] = useState(true);
     const { scrollY } = useScroll();
     const [lastScrollY, setLastScrollY] = useState(0);
-    const location = useLocation();
+    const pathname = usePathname();
 
     const closeMenu = () => setIsOpen(false);
 
@@ -71,24 +74,24 @@ const Navbar = () => {
                 >
                     
                     {/* Logo */}
-                    <NavLink
-                        to="/"
+                    <Link
+                        href="/"
                         className="text-xl font-bold tracking-tight text-white uppercase transition-colors hover:text-neutral-300"
                         onClick={closeMenu}
                     >
                         Nishan
-                    </NavLink>
+                    </Link>
 
                     {/* Desktop Navigation with Active Pill */}
                     <nav className="hidden md:flex items-center gap-1">
                         {navLinks.map(({ name, path }) => {
                             const isActive = path === '/' 
-                                ? location.pathname === '/' 
-                                : location.pathname.startsWith(path);
+                                ? pathname === '/' 
+                                : pathname.startsWith(path);
                             return (
-                                <NavLink
+                                <Link
                                     key={name}
-                                    to={path}
+                                    href={path}
                                     className="relative px-4 py-1.5 text-sm font-medium transition-colors hover:text-white"
                                     style={{ color: isActive ? '#ffffff' : '#a3a3a3' }}
                                 >
@@ -101,7 +104,7 @@ const Navbar = () => {
                                         />
                                     )}
                                     <span className="relative z-10">{name}</span>
-                                </NavLink>
+                                </Link>
                             );
                         })}
                     </nav>
@@ -121,12 +124,12 @@ const Navbar = () => {
 
                     {/* Desktop: Call to Action */}
                     <div className="hidden md:block">
-                        <NavLink 
-                            to="/contact"
+                        <Link 
+                            href="/contact"
                             className="shimmer-btn px-5 py-2 text-xs font-bold text-black bg-white rounded-full hover:bg-neutral-200 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                         >
                             Let's Talk
-                        </NavLink>
+                        </Link>
                     </div>
                 </Motion.div>
             </div>
@@ -141,22 +144,25 @@ const Navbar = () => {
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                     >
-                        {navLinks.map(({ name, path }) => (
-                            <NavLink
-                                key={name}
-                                to={path}
-                                onClick={closeMenu}
-                                className={({ isActive }) =>
-                                    `text-lg font-bold uppercase tracking-widest transition-colors duration-200 ${
+                        {navLinks.map(({ name, path }) => {
+                            const isActive = path === '/' 
+                                ? pathname === '/' 
+                                : pathname.startsWith(path);
+                            return (
+                                <Link
+                                    key={name}
+                                    href={path}
+                                    onClick={closeMenu}
+                                    className={`text-lg font-bold uppercase tracking-widest transition-colors duration-200 ${
                                         isActive
                                             ? "text-white"
                                             : "text-neutral-400 hover:text-white"
-                                    }`
-                                }
-                            >
-                                {name}
-                            </NavLink>
-                        ))}
+                                    }`}
+                                >
+                                    {name}
+                                </Link>
+                            );
+                        })}
                     </Motion.div>
                 )}
             </AnimatePresence>

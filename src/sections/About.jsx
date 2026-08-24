@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from "react";
 import { Globe } from "../components/globe";
 import CopyEmailButton from "../components/CopyEmailButton";

@@ -1,3 +1,5 @@
+"use client";
+
 import Project from "../components/Project";
 import { myProjects } from "../constants";
 import { motion } from "motion/react";
