@@ -1,4 +1,4 @@
-import About from '../../sections/About';
+import About from '@/features/about/About';
 
 export const metadata = {
   title: 'About Me',

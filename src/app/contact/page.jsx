@@ -1,4 +1,4 @@
-import Contact from '../../sections/Contact';
+import Contact from '@/features/contact/Contact';
 
 export const metadata = {
   title: 'Contact',

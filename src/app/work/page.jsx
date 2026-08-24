@@ -1,4 +1,4 @@
-import Experiences from '../../sections/Experiences';
+import Experiences from '@/features/experience/Experiences';
 
 export const metadata = {
   title: 'Experience',

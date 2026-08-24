@@ -1,4 +1,4 @@
-import Project from '../../sections/Project';
+import Project from '@/features/projects/ProjectSection';
 
 export const metadata = {
   title: 'Projects',
