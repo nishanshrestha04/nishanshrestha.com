@@ -4,6 +4,7 @@ import LayoutWrapper from '@/core/components/LayoutWrapper';
 import { ThemeProvider } from '@/core/components/ThemeProvider';
 
 import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -137,7 +138,8 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className="font-sans antialiased overflow-x-hidden pb-20 md:pb-0">
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
