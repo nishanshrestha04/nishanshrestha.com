@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1254 1254"
+     width="1254"
+     height="1254">
+  <title>NS Monogram</title>
+  <desc>Minimal geometric NS monogram inside a circular emblem.</desc>
+
+  <!-- Circular emblem -->
+  <circle cx="627" cy="627" r="617"
+          fill="#0A0A0A"
+          stroke="#242424"
+          stroke-width="8"/>
+
+  <!-- NS monogram -->
+  <g fill="#FFFFFF">
+    <path d="M 609 273 L 519 327 L 518 641 L 405 387 L 316 444 L 316 816 L 398 869 L 400 602 L 552 940 L 606 977 Z"/>
+    <path d="M 658 272 L 658 603 L 846 716 L 846 772 L 741 835 L 739 698 L 658 698 L 659 977 L 936 812 L 936 664 L 740 557 L 739 420 L 842 484 L 842 537 L 936 537 L 936 443 Z"/>
+  </g>
+</svg>

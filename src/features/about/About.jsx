@@ -62,7 +62,7 @@ const About = () => {
               </div>
               <div className="md:col-span-8">
                 <div className="flex items-center gap-2 md:gap-4 bg-bg-primary border border-border-primary p-6 md:p-8 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#0070f3]/0 via-[#0070f3]/5 to-[#0070f3]/0 opacity-50" />
+                  <div className="absolute inset-0 bg-linear-to-r from-[#0070f3]/0 via-[#0070f3]/5 to-[#0070f3]/0 opacity-50" />
 
                   <div
                     className="flex-1 text-center font-bold text-sm md:text-lg"

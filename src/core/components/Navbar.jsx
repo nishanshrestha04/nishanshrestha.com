@@ -8,7 +8,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
-  { name: 'Home', path: '/#', icon: Home },
+  { name: 'Home', path: '/', icon: Home },
   { name: 'About', path: '/about', icon: User },
   { name: 'Experience', path: '/experience', icon: Briefcase },
   { name: 'Projects', path: '/projects', icon: FolderCode },
