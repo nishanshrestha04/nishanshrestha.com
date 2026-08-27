@@ -55,7 +55,7 @@ export const metadata = {
     siteName: 'Nishan Shrestha',
     images: [
       {
-        url: '/og-image.jpg', // You can add an actual image here later
+        url: '/assets/og-image-with-cta.jpg',
         width: 1200,
         height: 630,
         alt: 'Nishan Shrestha Portfolio',
@@ -67,7 +67,7 @@ export const metadata = {
     title: 'Nishan Shrestha - AI & Full-Stack Developer',
     description:
       'Portfolio of Nishan Shrestha, a software developer specializing in AI-powered applications, machine learning, and full-stack systems.',
-    images: ['/og-image.jpg'],
+    images: ['/assets/og-image-with-cta.jpg'],
   },
   robots: {
     index: true,
@@ -117,7 +117,7 @@ export default function RootLayout({ children }) {
     '@type': 'Person',
     name: 'Nishan Shrestha',
     url: 'https://nishanshrestha04.com.np',
-    image: 'https://nishanshrestha04.com.np/og-image.jpg',
+    image: 'https://nishanshrestha04.com.np/assets/og-image-with-cta.jpg',
     sameAs: [
       'https://www.linkedin.com/in/shresthanishan/',
       'https://github.com/nishanshrestha04',
