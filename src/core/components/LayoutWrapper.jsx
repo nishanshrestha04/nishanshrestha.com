@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 
 const LayoutWrapper = ({ children }) => {
   const pathname = usePathname();
-  const isAdminRoute = pathname?.startsWith('/admin');
+  const isAdminRoute = pathname?.startsWith('/nishan-portal');
 
   return (
     <div className="flex flex-col min-h-screen relative bg-bg-primary">
