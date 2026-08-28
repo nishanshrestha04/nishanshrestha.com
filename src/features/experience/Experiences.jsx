@@ -1,10 +1,28 @@
+'use client';
+
 import Link from 'next/link';
-import { experiences } from '@/core/constants';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 import FadeIn from '@/core/components/animations/FadeIn';
 
 const Experiences = () => {
+  const { data: experiences = [], isLoading } = useQuery({
+    queryKey: ['experiences'],
+    queryFn: () => apiClient('/api/experiences'),
+  });
+
+  if (isLoading) {
+    return (
+      <section id="experience" className="c-space section-spacing border-t border-border-primary flex items-center justify-center">
+        <div className="font-mono text-text-secondary animate-pulse">LOADING_EXPERIENCE...</div>
+      </section>
+    );
+  }
+
   // Only show the first experience
   const exp = experiences[0];
+
+  if (!exp) return null;
 
   return (
     <section
@@ -41,18 +59,26 @@ const Experiences = () => {
 
         <div className="w-full md:w-2/3 border border-border-primary bg-bg-primary p-8 hover:border-[#0070f3]/50 transition-colors">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-text-primary tracking-tight">
-                {exp.title}
-              </h3>
-              <p className="text-[#0070f3] font-medium mt-1">{exp.job}</p>
+            <div className="flex items-center gap-4">
+              {exp.logoUrl && (
+                <div className="w-12 h-12 rounded-lg p-1 shrink-0 flex items-center justify-center border border-border-primary overflow-hidden">
+                  <img
+ src={exp.logoUrl} alt={exp.company} className="w-full h-full object-contain" />
+                </div>
+              )}
+              <div>
+                <h3 className="text-2xl font-bold text-text-primary tracking-tight">
+                  {exp.role}
+                </h3>
+                <p className="text-[#0070f3] font-medium mt-1">{exp.company}</p>
+              </div>
             </div>
             <div className="font-mono text-xs tracking-widest uppercase text-text-secondary border border-border-primary bg-bg-secondary px-3 py-1.5 ">
-              {exp.date}
+              {exp.period}
             </div>
           </div>
           <ul className="flex flex-col gap-4">
-            {exp.contents.slice(0, 3).map((item, i) => (
+            {(exp.description || []).slice(0, 3).map((item, i) => (
               <li
                 key={i}
                 className="text-text-secondary leading-relaxed flex items-start gap-3 text-lg"

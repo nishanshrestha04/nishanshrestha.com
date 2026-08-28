@@ -9,8 +9,21 @@ const GitHubCalendar = dynamic(
   { ssr: false },
 );
 import CopyEmailButton from '@/features/contact/CopyEmailButton';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 
 const About = () => {
+  const { data: profile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => apiClient('/api/profile'),
+  });
+
+  const exploring = profile?.currentlyExploring || [
+    'Agentic Workflows',
+    'Advanced RAG Architectures',
+    'Edge Deployment for ML Models',
+  ];
+
   return (
     <section className="c-space section-spacing pt-40 min-h-screen">
       <div className="w-full">
@@ -126,18 +139,21 @@ const About = () => {
               </div>
               <div className="md:col-span-8">
                 <ul className="flex flex-col gap-6 text-lg md:text-xl text-text-primary">
-                  <li className="flex items-center gap-4 border-b border-border-primary pb-6">
-                    <span className="text-[#0070f3] font-bold">01</span>
-                    Agentic Workflows
-                  </li>
-                  <li className="flex items-center gap-4 border-b border-border-primary pb-6">
-                    <span className="text-[#0070f3] font-bold">02</span>
-                    Advanced RAG Architectures
-                  </li>
-                  <li className="flex items-center gap-4 pb-6">
-                    <span className="text-[#0070f3] font-bold">03</span>
-                    Edge Deployment for ML Models
-                  </li>
+                  {exploring.map((item, index) => (
+                    <li
+                      key={index}
+                      className={`flex items-center gap-4 ${
+                        index !== exploring.length - 1
+                          ? 'border-b border-border-primary pb-6'
+                          : 'pb-6'
+                      }`}
+                    >
+                      <span className="text-[#0070f3] font-bold">
+                        0{index + 1}
+                      </span>
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

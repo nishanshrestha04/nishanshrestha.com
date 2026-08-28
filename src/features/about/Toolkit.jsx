@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import {
   Server,
   Layout,
@@ -9,7 +9,8 @@ import {
   Sparkles,
   Binary,
 } from 'lucide-react';
-import { myToolkit } from '@/core/constants';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -30,8 +31,40 @@ const iconMap = {
 const Toolkit = () => {
   const containerRef = useRef(null);
 
+  const { data: myToolkit = [], isLoading } = useQuery({
+    queryKey: ['toolkit'],
+    queryFn: () => apiClient('/api/toolkit'),
+  });
+
+  const formattedToolkit = useMemo(() => {
+    if (!Array.isArray(myToolkit)) return [];
+    
+    const categoryIconMap = {
+      'Frontend': 'Layout',
+      'Backend': 'Server',
+      'Database': 'Database',
+      'DevOps': 'Terminal',
+      'AI / ML': 'Sparkles',
+      'Languages': 'Binary',
+    };
+
+    const groups = myToolkit.reduce((acc, item) => {
+      const cat = item.category || 'Uncategorized';
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(item.name);
+      return acc;
+    }, {});
+    
+    return Object.keys(groups).sort().map(cat => ({
+      title: cat,
+      icon: categoryIconMap[cat] || 'Binary',
+      items: groups[cat],
+    }));
+  }, [myToolkit]);
+
   useGSAP(
     () => {
+      if (isLoading || formattedToolkit.length === 0) return;
       const cards = gsap.utils.toArray('.toolkit-card');
 
       gsap.from(cards, {
@@ -61,8 +94,16 @@ const Toolkit = () => {
         },
       });
     },
-    { scope: containerRef },
+    { scope: containerRef, dependencies: [isLoading, formattedToolkit.length] },
   );
+
+  if (isLoading) {
+    return (
+      <section id="toolkit" className="c-space section-spacing border-t border-border-primary overflow-hidden flex items-center justify-center">
+        <div className="font-mono text-text-secondary animate-pulse">LOADING_TOOLKIT...</div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -78,7 +119,7 @@ const Toolkit = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {myToolkit.map((toolkit) => {
+        {formattedToolkit.map((toolkit) => {
           const IconComponent = iconMap[toolkit.icon];
           return (
             <div

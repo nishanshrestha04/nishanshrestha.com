@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { myProjects } from '@/core/constants';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 import ProjectDrawer from '@/features/projects/ProjectDrawer';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '@/core/components/animations/FadeIn';
@@ -23,6 +24,11 @@ const Project = () => {
   const [activeCategory, setActiveCategory] = useState('ALL');
   const [selectedProject, setSelectedProject] = useState(null);
 
+  const { data: myProjects = [], isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => apiClient('/api/projects'),
+  });
+
   const filteredProjects = myProjects.filter((project) => {
     if (activeCategory === 'ALL') return true;
     return project.category === activeCategory;
@@ -31,6 +37,14 @@ const Project = () => {
   const featuredProject =
     filteredProjects.length > 0 ? filteredProjects[0] : null;
   const remainingProjects = filteredProjects.slice(1);
+
+  if (isLoading) {
+    return (
+      <section className="c-space section-spacing pt-40 min-h-screen flex items-center justify-center">
+        <div className="font-mono text-text-secondary animate-pulse">LOADING_PROJECTS...</div>
+      </section>
+    );
+  }
 
   return (
     <section className="c-space section-spacing pt-40 min-h-screen">
@@ -72,10 +86,10 @@ const Project = () => {
               className="w-full aspect-[21/9] md:aspect-[21/7] bg-bg-secondary border border-border-primary overflow-hidden mb-8 group cursor-pointer"
               onClick={() => setSelectedProject(featuredProject)}
             >
-              {featuredProject.image &&
-              !featuredProject.image.includes('code-placeholder') ? (
+              {(featuredProject.image || featuredProject.imageUrl) &&
+              !(featuredProject.image || featuredProject.imageUrl).includes('code-placeholder') ? (
                 <img
-                  src={featuredProject.image}
+                  src={featuredProject.imageUrl || featuredProject.image}
                   alt={featuredProject.title}
                   className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
@@ -136,10 +150,10 @@ const Project = () => {
                 className="w-full aspect-video bg-bg-secondary border border-border-primary overflow-hidden mb-6 cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
-                {project.image &&
-                !project.image.includes('code-placeholder') ? (
+                {(project.image || project.imageUrl) &&
+                !(project.image || project.imageUrl).includes('code-placeholder') ? (
                   <img
-                    src={project.image}
+                    src={project.imageUrl || project.image}
                     alt={project.title}
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500"
                   />

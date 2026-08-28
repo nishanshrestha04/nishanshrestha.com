@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { User, Briefcase, FolderCode, Mail, Menu, X, Home } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import ThemeToggle from './ThemeToggle';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 
 const navLinks = [
   { name: 'Home', path: '/', icon: Home },
@@ -42,6 +44,12 @@ const NavItems = ({ pathname }) => {
 const Navbar = () => {
   const pathname = usePathname();
 
+  const { data: profile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => apiClient('/api/profile'),
+  });
+  const socials = profile?.socials || [];
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-bg-primary/90 backdrop-blur-md border-b border-border-primary">
@@ -63,22 +71,26 @@ const Navbar = () => {
           <div className="flex items-center gap-2 justify-self-end">
             <ThemeToggle />
             <div className="w-px h-5 bg-border-primary mx-2 hidden sm:block" />
-            <a
-              href="https://github.com/nishanshrestha04"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-70 hover:opacity-100 transition-opacity p-2 text-text-primary"
-            >
-              <FaGithub className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/shresthanishan/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-70 hover:opacity-100 transition-opacity p-2 text-text-primary"
-            >
-              <FaLinkedin className="w-5 h-5" />
-            </a>
+            {socials.map((social, i) => {
+              const name = social.name.toLowerCase();
+              let Icon = null;
+              if (name.includes('github')) Icon = FaGithub;
+              if (name.includes('linkedin')) Icon = FaLinkedin;
+              
+              if (!Icon) return null;
+              
+              return (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-70 hover:opacity-100 transition-opacity p-2 text-text-primary"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </header>

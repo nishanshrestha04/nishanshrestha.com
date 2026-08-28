@@ -1,24 +1,46 @@
 'use client';
 
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { toast } from 'sonner';
-import { mySocials } from '@/core/constants';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 import TimezoneWidget from '@/features/contact/TimezoneWidget';
 import FadeIn from '@/core/components/animations/FadeIn';
 import RevealLeft from '@/core/components/animations/RevealLeft';
 import StaggerContainer from '@/core/components/animations/StaggerContainer';
+import { Mail, Globe } from 'lucide-react';
+import { FaLinkedin, FaGithub, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6';
+
+const getIcon = (name) => {
+  const n = name.toLowerCase();
+  if (n.includes('email')) return <Mail className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('linkedin')) return <FaLinkedin className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('github')) return <FaGithub className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('instagram')) return <FaInstagram className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('facebook')) return <FaFacebook className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('twitter') || n === 'x') return <FaXTwitter className="w-5 h-5 text-[#0070f3]" />;
+  if (n.includes('devfolio')) return <Globe className="w-5 h-5 text-[#0070f3]" />;
+  return <span className="w-1.5 h-1.5 bg-[#0070f3]" />;
+};
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
+
+  const { data: profile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => apiClient('/api/profile'),
+  });
+
+  const socials = profile?.socials || [];
+  const profileEmail = profile?.email || 'nishanshrestha212@gmail.com';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       toast.error('Please fill out all fields.');
@@ -26,33 +48,19 @@ const Contact = () => {
     }
     setLoading(true);
 
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_id',
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_id',
-        {
-          from_name: form.name,
-          to_name: 'Nishan',
-          from_email: form.email,
-          to_email: 'nishanshrestha212@gmail.com',
-          message: form.message,
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'public_key',
-      )
-      .then(
-        () => {
-          setLoading(false);
-          toast.success(
-            'Thank you. I will get back to you as soon as possible.',
-          );
-          setForm({ name: '', email: '', message: '' });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          toast.error('Ahh, something went wrong. Please try again.');
-        },
-      );
+    try {
+      await apiClient('/api/contacts', {
+        method: 'POST',
+        body: JSON.stringify(form),
+      });
+      toast.success('Thank you. I will get back to you as soon as possible.');
+      setForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error(error);
+      toast.error('Ahh, something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -84,21 +92,21 @@ const Contact = () => {
 
           <div className="flex flex-col gap-4 mt-2">
             <a
-              href="mailto:nishanshrestha212@gmail.com"
+              href={`mailto:${profileEmail}`}
               className="text-lg font-medium text-text-primary hover:text-[#0070f3] transition-colors flex items-center gap-3"
             >
-              <span className="w-1.5 h-1.5 bg-[#0070f3]" />
+              {getIcon('email')}
               Email
             </a>
-            {mySocials.map((social) => (
+            {socials.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg font-medium text-text-primary hover:text-[#0070f3] transition-colors flex items-center gap-3"
+                className="capitalize text-lg font-medium text-text-primary hover:text-[#0070f3] transition-colors flex items-center gap-3"
               >
-                <span className="w-1.5 h-1.5 bg-[#0070f3]" />
+                {getIcon(social.name)}
                 {social.name}
               </a>
             ))}
@@ -172,7 +180,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[var(--text-primary)] text-[var(--bg-primary)] py-4 px-8 font-bold hover:opacity-80 transition-opacity disabled:opacity-50 mt-2"
+              className="bg-(--text-primary) text-(--bg-primary) py-4 px-8 font-bold hover:opacity-80 transition-opacity disabled:opacity-50 mt-2"
             >
               {loading ? 'SENDING...' : 'SUBMIT'}
             </button>

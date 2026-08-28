@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { myProjects } from '@/core/constants';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/core/utils/apiClient';
 import ProjectDrawer from '@/features/projects/ProjectDrawer';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -11,11 +12,24 @@ import StaggerContainer from '@/core/components/animations/StaggerContainer';
 const FeaturedProjects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const getProjectData = (id) => myProjects.find((p) => p.id === id) || {};
+  const { data: myProjects = [], isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => apiClient('/api/projects'),
+  });
 
-  const banRakshak = getProjectData('banrakshak');
-  const stroke = getProjectData('stroke-prediction');
-  const pdfChatbot = getProjectData('pdf-chatbot');
+  if (isLoading) {
+    return (
+      <section id="projects" className="c-space section-spacing border-t border-border-primary flex items-center justify-center min-h-[50vh]">
+        <div className="font-mono text-text-secondary animate-pulse">LOADING_PROJECTS...</div>
+      </section>
+    );
+  }
+
+  const featuredProjects = myProjects.filter((p) => p.isFeatured);
+  
+  const banRakshak = featuredProjects[0] || {};
+  const stroke = featuredProjects[1] || {};
+  const pdfChatbot = featuredProjects[2] || {};
 
   return (
     <section
@@ -87,7 +101,7 @@ const FeaturedProjects = () => {
 
             <div className="w-full min-h-[300px] lg:min-h-full bg-bg-primary border-t lg:border-t-0 lg:border-l border-border-primary relative overflow-hidden">
               <img
-                src={banRakshak.image}
+                src={banRakshak.imageUrl || banRakshak.image}
                 alt={banRakshak.title}
                 className="w-full h-full object-cover"
               />
@@ -104,7 +118,7 @@ const FeaturedProjects = () => {
           <div className="w-full bg-bg-secondary border border-border-primary overflow-hidden flex flex-col group">
             <div className="w-full aspect-[4/3] bg-bg-primary border-b border-border-primary relative overflow-hidden">
               <img
-                src={stroke.image}
+                src={stroke.imageUrl || stroke.image}
                 alt={stroke.title}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
@@ -137,7 +151,7 @@ const FeaturedProjects = () => {
           <div className="w-full bg-bg-secondary border border-border-primary overflow-hidden flex flex-col group">
             <div className="w-full aspect-video bg-bg-primary border-b border-border-primary relative overflow-hidden">
               <img
-                src={pdfChatbot.image}
+                src={pdfChatbot.imageUrl || pdfChatbot.image}
                 alt={pdfChatbot.title}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />

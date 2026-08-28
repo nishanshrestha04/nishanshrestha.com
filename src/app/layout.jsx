@@ -2,6 +2,7 @@ import './globals.css';
 
 import LayoutWrapper from '@/core/components/LayoutWrapper';
 import { ThemeProvider } from '@/core/components/ThemeProvider';
+import QueryProvider from '@/core/providers/QueryProvider';
 
 import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
@@ -148,7 +149,9 @@ export default function RootLayout({ children }) {
           defaultTheme="dark"
           enableSystem
         >
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <QueryProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
