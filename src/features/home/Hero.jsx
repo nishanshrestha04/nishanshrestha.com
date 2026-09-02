@@ -21,6 +21,7 @@ const Hero = () => {
               </p>
             </div>
             <h1 className="text-hero">
+              <span className="block text-3xl md:text-4xl font-medium mb-4 text-text-primary">I'm Nishan Shrestha, and</span>
               I build <br className="hidden md:block" /> AI-powered{' '}
               <br className="hidden md:block" /> products{' '}
               <span className="text-text-secondary">that</span>{' '}

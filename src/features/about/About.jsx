@@ -40,7 +40,7 @@ const About = () => {
             {/* Intro */}
             <div className="border-l-2 border-[#0070f3] pl-6 md:pl-10">
               <h2 className="text-3xl md:text-5xl font-bold text-text-primary leading-tight">
-                I'm a software developer focused on AI-powered applications.
+                Hi, I'm Nishan Shrestha, a software developer focused on AI-powered applications.
               </h2>
             </div>
 

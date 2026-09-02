@@ -18,11 +18,11 @@ const AboutSummary = () => {
           className="w-full lg:w-2/3 flex flex-col gap-8 max-w-3xl"
         >
           <h3 className="text-3xl md:text-5xl font-bold text-text-primary tracking-tight leading-tight">
-            I'm a software developer focused on AI-powered applications.
+            I'm Nishan Shrestha, a software developer focused on AI-powered applications.
           </h3>
 
           <p className="text-text-secondary text-xl md:text-2xl leading-relaxed font-light">
-            I work across machine learning, backend systems and modern web
+            As a full-stack and AI developer based in Nepal, I work across machine learning, backend systems and modern web
             interfaces.
           </p>
 
